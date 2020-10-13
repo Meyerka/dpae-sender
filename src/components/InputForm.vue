@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h1>DPAE Sender</h1>
-    <input type="text" v-model="siretNumber" />
-    <input type="text" v-model="urssafCode" />
-    <input type="text" v-model="nafCode" />
-    <input type="text" v-model="employerName" />
+    <v-container>
+      <h1>DPAE Sender</h1>
+      <v-text-field v-model="siretNumber" label="SIRET Number"></v-text-field>
+      <input type="text" v-model="urssafCode" />
+      <input type="text" v-model="nafCode" />
+      <input type="text" v-model="employerName" />
+    </v-container>
   </div>
 </template>
 

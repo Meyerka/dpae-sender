@@ -1,27 +1,23 @@
 <template>
-  <div id="app">
-    <InputForm />
-  </div>
+  <v-app>
+    <v-main>
+      <InputForm />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import InputForm from "./components/InputForm.vue";
+import InputForm from "./components/InputForm";
 
 export default {
   name: "App",
+
   components: {
     InputForm,
   },
+
+  data: () => ({
+    //
+  }),
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
