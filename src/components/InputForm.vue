@@ -167,6 +167,16 @@ export default {
       );
       orgName.innerHTML = this.employer[0].name;
 
+
+      let orgNameBis = xmlDoc.createElement("rxorg:FR_Organization.SupplementaryDesignation.Text");
+      orgNameBis.innerHTML = this.employer[1].name;
+
+      let nafCode = xmlDoc.createElement("rxorg:FR_Organization.APE.Code");
+      orgName.innerHTML = this.nafCode;
+
+      let orgName = xmlDoc.createElement("");
+      orgName.innerHTML = ;
+
       xmlDoc.appendChild(upload);
       upload.appendChild(testIndicator);
       upload.appendChild(groupDpae);
@@ -174,6 +184,10 @@ export default {
       employerCategory.appendChild(employerIdentity);
       employerIdentity.appendChild(siret);
       employerIdentity.appendChild(orgName);
+      employerIdentity.appendChild(orgNameBis)
+      employerIdentity.appendChild(nafCode)
+
+
       console.log(xmlDoc);
 
       return xmlDoc;
