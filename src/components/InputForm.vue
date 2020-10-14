@@ -56,12 +56,14 @@
 
       <h2>Employer 1</h2>
       <v-text-field v-model="employer[0].name" label="Employer name"></v-text-field>
+      <v-text-field v-model="employer[0].address" label="Address"></v-text-field>
       <v-text-field v-model="employer[0].postCode" label="Employer postcode"></v-text-field>
       <v-text-field v-model="employer[0].city" label="Employer city"></v-text-field>
       <v-text-field v-model="employer[0].phone" label="Employer phone"></v-text-field>
 
       <h2>Employer 2</h2>
       <v-text-field v-model="employer[1].name" label="Employer name"></v-text-field>
+      <v-text-field v-model="employer[1].address" label="Address"></v-text-field>
       <v-text-field v-model="employer[1].postCode" label="Employer postcode"></v-text-field>
       <v-text-field v-model="employer[1].city" label="Employer city"></v-text-field>
       <v-text-field v-model="employer[1].phone" label="Employer phone"></v-text-field>
@@ -93,12 +95,14 @@ export default {
     employer: [
       {
         name: "",
+        address: "",
         postCode: "",
         city: "",
         phone: "",
       },
       {
         name: "",
+        address: "",
         postCode: "",
         city: "",
         phone: "",
@@ -167,27 +171,70 @@ export default {
       );
       orgName.innerHTML = this.employer[0].name;
 
-
-      let orgNameBis = xmlDoc.createElement("rxorg:FR_Organization.SupplementaryDesignation.Text");
+      let orgNameBis = xmlDoc.createElement(
+        "rxorg:FR_Organization.SupplementaryDesignation.Text"
+      );
       orgNameBis.innerHTML = this.employer[1].name;
 
       let nafCode = xmlDoc.createElement("rxorg:FR_Organization.APE.Code");
-      orgName.innerHTML = this.nafCode;
+      nafCode.innerHTML = this.nafCode;
 
-      let orgName = xmlDoc.createElement("");
-      orgName.innerHTML = ;
+      let urssafCode = xmlDoc.createElement("FR_Employer.URSSAF.Code");
+      urssafCode.innerHTML = this.urssafCode;
 
-      xmlDoc.appendChild(upload);
-      upload.appendChild(testIndicator);
-      upload.appendChild(groupDpae);
-      groupDpae.appendChild(employerCategory);
-      employerCategory.appendChild(employerIdentity);
+      let employerLocation = xmlDoc.createElement("FR_EmployerAddress");
+
+      let employerAddress = xmlDoc.createElement(
+        "rxpadr:FR_PostalAddress.StreetDesignation.Text"
+      );
+      employerAddress.innerHTML = this.employer[0].address;
+
+      let employerAddress2 = xmlDoc.createElement(
+        "rxpadr:FR_PostalAddress.Additional.Text"
+      );
+      employerAddress2.innerHTML = this.employer[1].address;
+
+      let employerCity = xmlDoc.createElement(
+        "rxpadr:FR_PostalAddress.Town.Text"
+      );
+      employerCity.innerHTML = this.employer[0].city;
+
+      let employerPostcode = xmlDoc.createElement(
+        "rxpadr:FR_PostalAddress.Postal.Code"
+      );
+      employerPostcode.innerHTML = this.employer[0].postCode;
+
+      let employerContact = xmlDoc.createElement("FR_EmployerContact");
+      let employerPhone = xmlDoc.createElement("FR_PhoneNumber");
+      let employerPhoneNumber = xmlDoc.createElement(
+        "rxphadr:FR_PhoneAddress.PhoneNumber.Text"
+      );
+      employerPhoneNumber.innerHTML = this.employer[0].phone;
+
+      employerContact.appendChild(employerPhone);
+      employerPhone.appendChild(employerPhoneNumber);
+
+      employerLocation.appendChild(employerAddress);
+      employerLocation.appendChild(employerAddress2);
+      employerLocation.appendChild(employerCity);
+      employerLocation.appendChild(employerPostcode);
+
       employerIdentity.appendChild(siret);
       employerIdentity.appendChild(orgName);
-      employerIdentity.appendChild(orgNameBis)
-      employerIdentity.appendChild(nafCode)
+      employerIdentity.appendChild(orgNameBis);
+      employerIdentity.appendChild(nafCode);
 
+      employerCategory.appendChild(employerContact);
+      employerCategory.appendChild(employerLocation);
+      employerCategory.appendChild(urssafCode);
+      employerCategory.appendChild(employerIdentity);
 
+      groupDpae.appendChild(employerCategory);
+
+      upload.appendChild(groupDpae);
+      upload.appendChild(testIndicator);
+
+      xmlDoc.appendChild(upload);
       console.log(xmlDoc);
 
       return xmlDoc;
