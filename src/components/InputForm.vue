@@ -1,85 +1,108 @@
 <template>
   <div>
     <v-container>
-      <v-checkbox v-model="isTest" persistent-hint hint="TestFile ?" />
+      <v-row>
+        <v-col cols="6">
+          <v-card>
+            <v-card-title class="success dark">
+              <span class="headline white--text">Contract</span>
+            </v-card-title>
+            <v-card-text>
+              <v-text-field v-model="siretNumber" label="SIRET Number"></v-text-field>
+              <v-text-field v-model="urssafCode" label="URSSAF Code"></v-text-field>
+              <v-text-field v-model="nafCode" label="NAF Code"></v-text-field>
 
-      <h1>DPAE Sender</h1>
+              <v-menu
+                v-model="menu2"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="contract.hiringDate"
+                    label="Hiring date"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="contract.hiringDate" @input="menu2 = false"></v-date-picker>
+              </v-menu>
 
-      <h2>Contract</h2>
-      <v-text-field v-model="siretNumber" label="SIRET Number"></v-text-field>
-      <v-text-field v-model="urssafCode" label="URSSAF Code"></v-text-field>
-      <v-text-field v-model="nafCode" label="NAF Code"></v-text-field>
+              <v-text-field v-model="contract.healthService" label="Health service number"></v-text-field>
+              <v-text-field
+                v-model="contract.trialPeriod"
+                label="Trial period (in months)"
+                type="number"
+              ></v-text-field>
+              <v-text-field v-model="contract.type" label="Type"></v-text-field>
+              <v-menu
+                v-if="contract.type==='CDD'"
+                v-model="menu3"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="contract.endOfCdd"
+                    label="End of CDD"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="contract.endOfCdd" @input="menu3 = false"></v-date-picker>
+              </v-menu>
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="6">
+          <v-card>
+            <v-card-title class="success dark">
+              <span class="headline white--text">Employer</span>
+            </v-card-title>
+            <v-card-text>
+              <v-text-field v-model="employer.name" label="Employer name"></v-text-field>
+              <v-text-field v-model="employer.altName" label="Alternative name"></v-text-field>
+              <v-text-field v-model="employer.address" label="Address"></v-text-field>
+              <v-text-field v-model="employer.address2" label="Address 2"></v-text-field>
+              <v-text-field v-model="employer.postCode" label="Employer postcode"></v-text-field>
+              <v-text-field v-model="employer.city" label="Employer city"></v-text-field>
+              <v-text-field v-model="employer.phone" label="Employer phone"></v-text-field>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-card>
+        <v-card-title class="success dark">
+          <span class="headline white--text">Employee</span>
+        </v-card-title>
+        <v-card-text>
+          <v-text-field v-model="employee.lastName" label="Last name"></v-text-field>
+          <v-text-field v-model="employee.firstName" label="First name"></v-text-field>
+          <v-text-field v-model="employee.gender" label="Gender"></v-text-field>
+          <v-text-field v-model="employee.birthDate" label="Birth date"></v-text-field>
+          <v-text-field v-model="employee.birthPlace" label="Birth place"></v-text-field>
+          <v-text-field v-model="employee.birthDepartment" label="Birth department"></v-text-field>
+          <v-text-field v-model="employee.socialSecurityNumber" label="Social security number"></v-text-field>
+          <v-checkbox v-model="isTest" persistent-hint hint="TestFile ?" />
+        </v-card-text>
+      </v-card>
 
-      <v-menu
-        v-model="menu2"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        transition="scale-transition"
-        offset-y
-        min-width="290px"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="contract.hiringDate"
-            label="Hiring date"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker v-model="contract.hiringDate" @input="menu2 = false"></v-date-picker>
-      </v-menu>
-
-      <v-text-field v-model="contract.healthService" label="Health service number"></v-text-field>
-      <v-text-field v-model="contract.trialPeriod" label="Trial period (in months)" type="number"></v-text-field>
-      <v-text-field v-model="contract.type" label="Type"></v-text-field>
-      <v-menu
-        v-if="contract.type==='CDD'"
-        v-model="menu2"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        transition="scale-transition"
-        offset-y
-        min-width="290px"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="contract.endOfCdd"
-            label="End of CDD"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker v-model="contract.endOfCdd" @input="menu2 = false"></v-date-picker>
-      </v-menu>
-
-      <h2>Employer 1</h2>
-      <v-text-field v-model="employer[0].name" label="Employer name"></v-text-field>
-      <v-text-field v-model="employer[0].address" label="Address"></v-text-field>
-      <v-text-field v-model="employer[0].postCode" label="Employer postcode"></v-text-field>
-      <v-text-field v-model="employer[0].city" label="Employer city"></v-text-field>
-      <v-text-field v-model="employer[0].phone" label="Employer phone"></v-text-field>
-
-      <h2>Employer 2</h2>
-      <v-text-field v-model="employer[1].name" label="Employer name"></v-text-field>
-      <v-text-field v-model="employer[1].address" label="Address"></v-text-field>
-      <v-text-field v-model="employer[1].postCode" label="Employer postcode"></v-text-field>
-      <v-text-field v-model="employer[1].city" label="Employer city"></v-text-field>
-      <v-text-field v-model="employer[1].phone" label="Employer phone"></v-text-field>
-
-      <h2>Employee</h2>
-      <v-text-field v-model="employee.lastName" label="Last name"></v-text-field>
-      <v-text-field v-model="employee.firstName" label="First name"></v-text-field>
-      <v-text-field v-model="employee.gender" label="Gender"></v-text-field>
-      <v-text-field v-model="employee.birthDate" label="Birth date"></v-text-field>
-      <v-text-field v-model="employee.birthPlace" label="Birth place"></v-text-field>
-      <v-text-field v-model="employee.birthDepartment" label="Birth department"></v-text-field>
-      <v-text-field v-model="employee.socialSecurityNumber" label="Social security number"></v-text-field>
-
-      <h1>{{employer[1].postCode}}</h1>
-
-      <v-btn @click="generateXml()" color="primary" absolute right class="my-6">Generate file</v-btn>
+      <v-btn
+        v-if="!fileAlert"
+        @click="downloadXML()"
+        color="primary"
+        absolute
+        right
+        class="my-6"
+      >Generate file</v-btn>
     </v-container>
   </div>
 </template>
@@ -92,22 +115,15 @@ export default {
     siretNumber: "",
     urssafCode: "",
     nafCode: "",
-    employer: [
-      {
-        name: "",
-        address: "",
-        postCode: "",
-        city: "",
-        phone: "",
-      },
-      {
-        name: "",
-        address: "",
-        postCode: "",
-        city: "",
-        phone: "",
-      },
-    ],
+    employer: {
+      name: "",
+      altName: "",
+      address: "",
+      address2: "",
+      postCode: "",
+      city: "",
+      phone: "",
+    },
     employee: {
       lastName: "",
       firstName: "",
@@ -130,7 +146,19 @@ export default {
   }),
   props: {},
   methods: {
-    generateXml() {
+    downloadXML() {
+      const serializer = new XMLSerializer();
+      const xmlStr = serializer.serializeToString(this.createXML());
+      console.log(xmlStr);
+      let encodedXml =
+        "data:text/xml;charset=utf-8," + encodeURIComponent(xmlStr);
+      let link = document.createElement("a");
+      link.setAttribute("href", encodedXml);
+      link.setAttribute("download", "dpae.xml");
+      document.body.appendChild(link);
+      link.click();
+    },
+    createXML() {
       let xmlDoc = document.implementation.createDocument("", "", null);
       let upload = xmlDoc.createElement("FR_DUE_Upload");
       upload.setAttribute(
@@ -170,12 +198,12 @@ export default {
       let orgName = xmlDoc.createElement(
         "rxorg:FR_Organization.Designation.Text"
       );
-      orgName.innerHTML = this.employer[0].name;
+      orgName.innerHTML = this.employer.name;
 
       let orgNameBis = xmlDoc.createElement(
         "rxorg:FR_Organization.SupplementaryDesignation.Text"
       );
-      orgNameBis.innerHTML = this.employer[1].name;
+      orgNameBis.innerHTML = this.employer.altName;
 
       let nafCode = xmlDoc.createElement("rxorg:FR_Organization.APE.Code");
       nafCode.innerHTML = this.nafCode;
@@ -188,29 +216,29 @@ export default {
       let employerAddress = xmlDoc.createElement(
         "rxpadr:FR_PostalAddress.StreetDesignation.Text"
       );
-      employerAddress.innerHTML = this.employer[0].address;
+      employerAddress.innerHTML = this.employer.address;
 
       let employerAddress2 = xmlDoc.createElement(
         "rxpadr:FR_PostalAddress.Additional.Text"
       );
-      employerAddress2.innerHTML = this.employer[1].address;
+      employerAddress2.innerHTML = this.employer.address2;
 
       let employerCity = xmlDoc.createElement(
         "rxpadr:FR_PostalAddress.Town.Text"
       );
-      employerCity.innerHTML = this.employer[0].city;
+      employerCity.innerHTML = this.employer.city;
 
       let employerPostcode = xmlDoc.createElement(
         "rxpadr:FR_PostalAddress.Postal.Code"
       );
-      employerPostcode.innerHTML = this.employer[0].postCode;
+      employerPostcode.innerHTML = this.employer.postCode;
 
       let employerContact = xmlDoc.createElement("FR_EmployerContact");
       let employerPhone = xmlDoc.createElement("FR_PhoneNumber");
       let employerPhoneNumber = xmlDoc.createElement(
         "rxphadr:FR_PhoneAddress.PhoneNumber.Text"
       );
-      employerPhoneNumber.innerHTML = this.employer[0].phone;
+      employerPhoneNumber.innerHTML = this.employer.phone;
 
       let employeeGroup = xmlDoc.createElement("FR_EmployeeGroup");
       let employee = xmlDoc.createElement("FR_Employee");
