@@ -1,6 +1,8 @@
 <template>
   <div>
     <v-container>
+      <v-checkbox v-model="isTest" persistent-hint hint="TestFile ?" />
+
       <h1>DPAE Sender</h1>
 
       <h2>Contract</h2>
@@ -84,8 +86,10 @@
 export default {
   name: "InputForm",
   data: () => ({
+    isTest: false,
     siretNumber: "",
     urssafCode: "",
+    nafCode: "",
     employer: [
       {
         name: "",
@@ -123,11 +127,55 @@ export default {
     generateXml() {
       let xmlDoc = document.implementation.createDocument("", "", null);
       //let upload =
-      var upload = xmlDoc.createElement("FR_DUE_Upload");
-      upload.setAttribute("gri", "huighr");
-      console.log(xmlDoc);
+      let upload = xmlDoc.createElement("FR_DUE_Upload");
+      upload.setAttribute(
+        "xmlns:cct",
+        "urn:oasis:names:tc:ubl:CoreComponentTypes:1.0:0.70"
+      );
+
+      upload.setAttribute("xmlns:rxdt", "http://www.repxml.org/DataTypes");
+      upload.setAttribute("xmlns:rxorg", "http://www.repxml.org/Organization");
+      upload.setAttribute(
+        "xmlns:rxpadr",
+        "http://www.repxml.org/PostalAddress"
+      );
+      upload.setAttribute(
+        "xmlns:rxpers",
+        "http://www.repxml.org/Person_Identity"
+      );
+      upload.setAttribute(
+        "xmlns:rxphadr",
+        "http://www.repxml.org/PhoneAddress"
+      );
+      upload.setAttribute(
+        "xmlns:xsi",
+        "http://www.w3.org/2001/XMLSchema-instance"
+      );
+
+      let testIndicator = xmlDoc.createElement("FR_DUE_Upload.Test.Indicator");
+      testIndicator.innerHTML = this.isTest;
+      let groupDpae = xmlDoc.createElement("FR_DuesGroup");
+      let employerCategory = xmlDoc.createElement("FR_Employer");
+      let employerIdentity = xmlDoc.createElement("FR_EmployerIdentity");
+      let siret = xmlDoc.createElement(
+        "rxorg:FR_Organization.SIRET.Identifier"
+      );
+      siret.innerHTML = this.siretNumber;
+
+      let orgName = xmlDoc.createElement(
+        "rxorg:FR_Organization.Designation.Text"
+      );
+      orgName.innerHTML = this.employer[0].name;
 
       xmlDoc.appendChild(upload);
+      upload.appendChild(testIndicator);
+      upload.appendChild(groupDpae);
+      groupDpae.appendChild(employerCategory);
+      employerCategory.appendChild(employerIdentity);
+      employerIdentity.appendChild(siret);
+      employerIdentity.appendChild(orgName);
+      console.log(xmlDoc);
+
       return xmlDoc;
     },
   },
