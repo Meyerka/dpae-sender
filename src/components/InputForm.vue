@@ -296,10 +296,10 @@ export default {
       employerIdentity.appendChild(orgNameBis);
       employerIdentity.appendChild(nafCode);
 
-      employerCategory.appendChild(employerContact);
-      employerCategory.appendChild(employerLocation);
-      employerCategory.appendChild(urssafCode);
       employerCategory.appendChild(employerIdentity);
+      employerCategory.appendChild(urssafCode);
+      employerCategory.appendChild(employerLocation);
+      employerCategory.appendChild(employerContact);
 
       employeeIdentity.appendChild(surname);
       employeeIdentity.appendChild(usualName);
@@ -321,18 +321,18 @@ export default {
       contract.appendChild(contractHealthService);
       contract.appendChild(trialTime);
 
-      employee.appendChild(complement);
-      employee.appendChild(birth);
-      employee.appendChild(nni);
       employee.appendChild(employeeIdentity);
+      employee.appendChild(nni);
+      employee.appendChild(birth);
+      employee.appendChild(complement);
       employeeGroup.appendChild(employee);
       employeeGroup.appendChild(contract);
 
-      groupDpae.appendChild(employeeGroup);
       groupDpae.appendChild(employerCategory);
+      groupDpae.appendChild(employeeGroup);
 
-      upload.appendChild(groupDpae);
       upload.appendChild(testIndicator);
+      upload.appendChild(groupDpae);
 
       xmlDoc.appendChild(upload);
       console.log(xmlDoc);
