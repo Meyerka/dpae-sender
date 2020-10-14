@@ -125,12 +125,13 @@ export default {
       type: "",
       endOfCdd: "",
     },
+
+    comment: "",
   }),
   props: {},
   methods: {
     generateXml() {
       let xmlDoc = document.implementation.createDocument("", "", null);
-      //let upload =
       let upload = xmlDoc.createElement("FR_DUE_Upload");
       upload.setAttribute(
         "xmlns:cct",
@@ -281,7 +282,8 @@ export default {
       let trialTime = xmlDoc.createElement("FR_Contract.TrialTime.Text");
       trialTime.innerHTML = this.contract.trialPeriod;
 
-      employerContact.appendChild(employerPhone);
+      let comment = xmlDoc.createElement("FR_EmployeeGroup.Comment.Text");
+      comment.innerHTML = this.comment;
       employerPhone.appendChild(employerPhoneNumber);
 
       employerLocation.appendChild(employerAddress);
