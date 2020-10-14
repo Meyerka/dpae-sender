@@ -211,6 +211,49 @@ export default {
       );
       employerPhoneNumber.innerHTML = this.employer[0].phone;
 
+      let employeeGroup = xmlDoc.createElement("FR_EmployeeGroup");
+      let employee = xmlDoc.createElement("FR_Employee");
+      let employeeIdentity = xmlDoc.createElement("FR_EmployeeIdentity");
+
+      let surname = xmlDoc.createElement(
+        "rxpers:FR_PersonIdentity.Surname.Text"
+      );
+      surname.innerHTML = this.employee.lastName;
+
+      let usualName = xmlDoc.createElement(
+        "rxpers:FR_PersonIdentity.UsualName.Text"
+      );
+      usualName.innerHTML = this.employee.lastName;
+
+      let firstName = xmlDoc.createElement(
+        "rxpers:FR_PersonIdentity.ChristianName.Text"
+      );
+      firstName.innerHTML = this.employee.firstName;
+
+      let gender = xmlDoc.createElement("rxpers:FR_PersonIdentity.Sex.Code");
+      gender.innerHTML = this.employee.gender;
+
+      let nni = xmlDoc.createElement("rxpers:FR_NNI");
+      let nniNumber = xmlDoc.createElement("rxpers:FR_NNI.NIR.Identifier");
+      nniNumber.innerHTML = this.employee.socialSecurityNumber;
+      let nniKey = xmlDoc.createElement("rxpers:FR_NNI.NIRKey.Text");
+      nniKey.innerHTML = "TO BE CALCULATED";
+
+      let birth = xmlDoc.createElement("rxpers:FR_Birth");
+
+      let birthDate = xmlDoc.createElement("rxpers:FR_Birth.Date");
+      birthDate.innerHTML = this.employee.birthDate;
+
+      let birthTown = xmlDoc.createElement("rxpers:FR_Birth.Town.Text");
+      birthTown.innerHTML = this.employee.birthPlace;
+
+      let complement = xmlDoc.createElement("FR_EmployeeComplement");
+
+      let birthDepartment = xmlDoc.createElement(
+        "FR_EmployeeComplement.Birth_Department.Code"
+      );
+      birthDepartment.innerHTML = this.employee.birthDepartment;
+
       employerContact.appendChild(employerPhone);
       employerPhone.appendChild(employerPhoneNumber);
 
@@ -229,6 +272,26 @@ export default {
       employerCategory.appendChild(urssafCode);
       employerCategory.appendChild(employerIdentity);
 
+      employeeIdentity.appendChild(surname);
+      employeeIdentity.appendChild(usualName);
+      employeeIdentity.appendChild(firstName);
+      employeeIdentity.appendChild(gender);
+
+      nni.appendChild(nniNumber);
+      nni.appendChild(nniKey);
+
+      birth.appendChild(birthDate);
+      birth.appendChild(birthTown);
+
+      complement.appendChild(birthDepartment);
+
+      employee.appendChild(complement);
+      employee.appendChild(birth);
+      employee.appendChild(nni);
+      employee.appendChild(employeeIdentity);
+      employeeGroup.appendChild(employee);
+
+      groupDpae.appendChild(employeeGroup);
       groupDpae.appendChild(employerCategory);
 
       upload.appendChild(groupDpae);
