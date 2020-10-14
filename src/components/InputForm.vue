@@ -254,6 +254,33 @@ export default {
       );
       birthDepartment.innerHTML = this.employee.birthDepartment;
 
+      let contract = xmlDoc.createElement("FR_Contract");
+      let contractStartDate = xmlDoc.createElement(
+        "FR_Contract.StartContract.Date"
+      );
+      contractStartDate.innerHTML = this.contract.hiringDate;
+
+      let contractStartTime = xmlDoc.createElement(
+        "FR_Contract.StartContract.Time"
+      );
+      contractStartTime.innerHTML = "00:00:00";
+
+      let contractEndDate = xmlDoc.createElement(
+        "FR_Contract.EndContract.Date"
+      );
+      contractEndDate.innerHTML = this.contract.endOfCdd;
+
+      let contractCode = xmlDoc.createElement("FR_Contract.Nature.Code");
+      contractCode.innerHTML = this.contract.type;
+
+      let contractHealthService = xmlDoc.createElement(
+        "FR_Contract.HealthService.Text"
+      );
+      contractHealthService.innerHTML = this.contract.healthService;
+
+      let trialTime = xmlDoc.createElement("FR_Contract.TrialTime.Text");
+      trialTime.innerHTML = this.contract.trialPeriod;
+
       employerContact.appendChild(employerPhone);
       employerPhone.appendChild(employerPhoneNumber);
 
@@ -285,11 +312,19 @@ export default {
 
       complement.appendChild(birthDepartment);
 
+      contract.appendChild(contractStartDate);
+      contract.appendChild(contractStartTime);
+      contract.appendChild(contractEndDate);
+      contract.appendChild(contractCode);
+      contract.appendChild(contractHealthService);
+      contract.appendChild(trialTime);
+
       employee.appendChild(complement);
       employee.appendChild(birth);
       employee.appendChild(nni);
       employee.appendChild(employeeIdentity);
       employeeGroup.appendChild(employee);
+      employeeGroup.appendChild(contract);
 
       groupDpae.appendChild(employeeGroup);
       groupDpae.appendChild(employerCategory);
