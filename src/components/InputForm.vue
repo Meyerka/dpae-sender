@@ -146,6 +146,9 @@ export default {
   }),
   props: {},
   methods: {
+    seedData() {
+      this.
+    },
     downloadXML() {
       const serializer = new XMLSerializer();
       const xmlStr = serializer.serializeToString(this.createXML());
