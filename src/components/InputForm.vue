@@ -94,15 +94,14 @@
           <v-checkbox v-model="isTest" persistent-hint hint="TestFile ?" />
         </v-card-text>
       </v-card>
-
-      <v-btn
-        v-if="!fileAlert"
-        @click="downloadXML()"
-        color="primary"
-        absolute
-        right
-        class="my-6"
-      >Generate file</v-btn>
+      <v-row>
+        <v-col>
+          <v-btn @click="seedData()" color="primary" class="my-6">Seed data for tests</v-btn>
+        </v-col>
+        <v-col>
+          <v-btn @click="downloadXML()" color="success" class="my-6">Generate file</v-btn>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -147,7 +146,16 @@ export default {
   props: {},
   methods: {
     seedData() {
-      this.
+      this.siretNumber = process.env.VUE_APP_ENV_SIRET;
+      this.urssafCode = process.env.VUE_APP_ENV_URSSAFCODE;
+      this.nafCode = process.env.VUE_APP_ENV_NAFCODE;
+      this.employer.name = process.env.VUE_APP_ENV_ORGNAME;
+      this.employer.altName = process.env.VUE_APP_ENV_ORGNAMEBIS;
+      this.employer.address = process.env.VUE_APP_ENV_ORGADDRESS;
+      this.employer.address2 = process.env.VUE_APP_ENV_ORGADDRESS2;
+      this.employer.postCode = process.env.VUE_APP_ENV_ORGPOSTCODE;
+      this.employer.city = process.env.VUE_APP_ENV_ORGCITY;
+      this.employer.phone = process.env.VUE_APP_ENV_ORGPHONE;
     },
     downloadXML() {
       const serializer = new XMLSerializer();
