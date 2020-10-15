@@ -101,12 +101,18 @@
         <v-col>
           <v-btn @click="downloadXML()" color="success" class="my-6">Generate file</v-btn>
         </v-col>
+
+        <v-col>
+          <v-btn @click="authDpae()" color="success" class="my-6">Test api</v-btn>
+        </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "InputForm",
   data: () => ({
@@ -145,6 +151,9 @@ export default {
   }),
   props: {},
   methods: {
+    authDpae() {
+      axios.get("https://services.net-entreprises.fr/authentifier/1.0");
+    },
     seedData() {
       this.siretNumber = process.env.VUE_APP_ENV_SIRET;
       this.urssafCode = process.env.VUE_APP_ENV_URSSAFCODE;
