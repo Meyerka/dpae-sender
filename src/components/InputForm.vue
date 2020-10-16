@@ -107,6 +107,7 @@
         </v-col>
       </v-row>
     </v-container>
+    {{info}}
   </div>
 </template>
 
@@ -116,6 +117,7 @@ import axios from "axios";
 export default {
   name: "InputForm",
   data: () => ({
+    info: "",
     isTest: false,
     siretNumber: "",
     urssafCode: "",
@@ -149,10 +151,29 @@ export default {
 
     comment: "",
   }),
+  mounted() {
+    const body = this.getAuthXml();
+    console.log(body);
+    const config = {
+      headers: { "Content-Type": "text/xml" },
+    };
+
+    axios
+      .post(
+        "https://services.net-entreprises.fr/authentifier/1.0/",
+        body,
+        config
+      )
+      .then((response) => {
+        console.log(response);
+        this.info = response;
+      });
+  },
   props: {},
   methods: {
-    authDpae() {
-      axios.get("https://services.net-entreprises.fr/authentifier/1.0");
+    getAuthXml() {
+      console.log(process.env.VUE_APP_ENV_BODY);
+      return process.env.VUE_APP_ENV_BODY;
     },
     seedData() {
       this.siretNumber = process.env.VUE_APP_ENV_SIRET;
