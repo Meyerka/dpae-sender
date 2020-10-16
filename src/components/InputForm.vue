@@ -152,8 +152,7 @@ export default {
     comment: "",
   }),
   mounted() {
-    const body = this.getAuthXml();
-    console.log(body);
+    const body = process.env.VUE_APP_ENV_BODY;
     const config = {
       headers: { "Content-Type": "text/xml" },
     };
@@ -171,10 +170,6 @@ export default {
   },
   props: {},
   methods: {
-    getAuthXml() {
-      console.log(process.env.VUE_APP_ENV_BODY);
-      return process.env.VUE_APP_ENV_BODY;
-    },
     seedData() {
       this.siretNumber = process.env.VUE_APP_ENV_SIRET;
       this.urssafCode = process.env.VUE_APP_ENV_URSSAFCODE;
