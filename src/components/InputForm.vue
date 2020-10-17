@@ -107,7 +107,7 @@
         </v-col>
       </v-row>
     </v-container>
-    {{info}}
+    {{authstring}}
   </div>
 </template>
 
@@ -119,7 +119,7 @@ export default {
   data: () => ({
     menu2: "",
     menu3: "",
-    info: "",
+    authstring: "",
     isTest: false,
     siretNumber: "",
     urssafCode: "",
@@ -167,11 +167,31 @@ export default {
       )
       .then((response) => {
         console.log(response);
-        this.info = response;
+        this.authstring = response;
       });
   },
   props: {},
   methods: {
+    postDpae() {
+      const body = ;
+      const config = {
+        headers: { 
+          "Content-Type": "text/xml",
+          "Authorization": "DSNLogin jeton= " + this.info 
+          },
+      };
+
+      axios
+        .post(
+          "https://depot.dpae-edi.urssaf.fr:8443/deposer-dsn/1.0/",
+          body,
+          config
+        )
+        .then((response) => {
+          console.log(response);
+          this.authstring = response;
+        });
+    },
     convertDate(inputDate) {
       function pad(s) {
         return s < 10 ? "0" + s : s;
