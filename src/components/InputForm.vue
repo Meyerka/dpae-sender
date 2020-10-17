@@ -195,7 +195,8 @@ export default {
     },
     downloadXML() {
       const serializer = new XMLSerializer();
-      const xmlStr = serializer.serializeToString(this.createXML());
+      let xmlStr = serializer.serializeToString(this.createXML());
+      xmlStr = '<?xml version="1.0" encoding="ISO-8859-1" ?>' + xmlStr;
       console.log(xmlStr);
       let encodedXml =
         "data:text/xml;charset=utf-8," + encodeURIComponent(xmlStr);
