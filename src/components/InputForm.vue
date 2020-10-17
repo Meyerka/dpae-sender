@@ -117,6 +117,8 @@ import axios from "axios";
 export default {
   name: "InputForm",
   data: () => ({
+    menu2: "",
+    menu3: "",
     info: "",
     isTest: false,
     siretNumber: "",
