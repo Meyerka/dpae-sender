@@ -91,7 +91,13 @@
           <v-text-field v-model="employee.birthPlace" label="Birth place"></v-text-field>
           <v-text-field v-model="employee.birthDepartment" label="Birth department"></v-text-field>
           <v-text-field v-model="employee.socialSecurityNumber" label="Social security number"></v-text-field>
-          <v-checkbox v-model="isTest" persistent-hint hint="TestFile ?" />
+          <v-checkbox
+            v-model="isTest"
+            persistent-hint
+            hint="TestFile ?"
+            true-value="1"
+            false-value="0"
+          />
         </v-card-text>
       </v-card>
       <v-row>
@@ -173,12 +179,12 @@ export default {
   props: {},
   methods: {
     postDpae() {
-      const body = ;
+      const body = "";
       const config = {
-        headers: { 
+        headers: {
           "Content-Type": "text/xml",
-          "Authorization": "DSNLogin jeton= " + this.info 
-          },
+          Authorization: "DSNLogin jeton= " + this.info,
+        },
       };
 
       axios
