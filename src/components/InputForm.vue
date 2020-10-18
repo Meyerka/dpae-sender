@@ -206,15 +206,6 @@ export default {
           this.authstring = response;
         });
     },
-    convertDate(inputDate) {
-      function pad(s) {
-        return s < 10 ? "0" + s : s;
-      }
-      let d = new Date(inputDate);
-      return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join(
-        "/"
-      );
-    },
     seedData() {
       this.siretNumber = process.env.VUE_APP_ENV_SIRET;
       this.urssafCode = process.env.VUE_APP_ENV_URSSAFCODE;
@@ -369,7 +360,7 @@ export default {
       let contractStartDate = xmlDoc.createElement(
         "FR_Contract.StartContract.Date"
       );
-      contractStartDate.innerHTML = this.convertDate(this.contract.hiringDate);
+      contractStartDate.innerHTML = this.contract.hiringDate;
 
       let contractStartTime = xmlDoc.createElement(
         "FR_Contract.StartContract.Time"
@@ -379,7 +370,7 @@ export default {
       let contractEndDate = xmlDoc.createElement(
         "FR_Contract.EndContract.Date"
       );
-      contractEndDate.innerHTML = this.convertDate(this.contract.endOfCdd);
+      contractEndDate.innerHTML = this.contract.endOfCdd;
 
       let contractCode = xmlDoc.createElement("FR_Contract.Nature.Code");
       contractCode.innerHTML = this.contract.type;
