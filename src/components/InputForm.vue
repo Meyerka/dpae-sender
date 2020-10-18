@@ -86,7 +86,7 @@
         <v-card-text>
           <v-text-field v-model="employee.lastName" label="Last name"></v-text-field>
           <v-text-field v-model="employee.firstName" label="First name"></v-text-field>
-          <v-text-field v-model="employee.gender" label="Gender"></v-text-field>
+          <v-select :items="genderSelect" v-model="employee.gender" label="Gender"></v-select>
           <v-text-field v-model="employee.birthDate" label="Birth date"></v-text-field>
           <v-text-field v-model="employee.birthPlace" label="Birth place"></v-text-field>
           <v-text-field v-model="employee.birthDepartment" label="Birth department"></v-text-field>
@@ -126,7 +126,7 @@ export default {
     menu2: "",
     menu3: "",
     authstring: "",
-    isTest: false,
+    isTest: "1",
     siretNumber: "",
     urssafCode: "",
     nafCode: "",
@@ -156,8 +156,11 @@ export default {
       type: "",
       endOfCdd: "",
     },
-
     comment: "",
+    genderSelect: [
+      { text: "Female", value: "2" },
+      { text: "Male", value: "1" },
+    ],
   }),
   mounted() {
     const body = process.env.VUE_APP_ENV_BODY;
