@@ -38,7 +38,8 @@
                 label="Trial period (in days)"
                 type="number"
               ></v-text-field>
-              <v-text-field v-model="contract.type" label="Type"></v-text-field>
+              <v-select :items="contractSelect" v-model="contract.type" label="Type"></v-select>
+
               <v-menu
                 v-if="contract.type==='CDD'"
                 v-model="menu3"
@@ -160,6 +161,10 @@ export default {
     genderSelect: [
       { text: "Female", value: "2" },
       { text: "Male", value: "1" },
+    ],
+    contractSelect: [
+      { text: "CDD", value: "CDD" },
+      { text: "CDI", value: "CDI" },
     ],
   }),
   mounted() {
