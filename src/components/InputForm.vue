@@ -387,6 +387,8 @@ export default {
       comment.innerHTML = this.comment;
       employerPhone.appendChild(employerPhoneNumber);
 
+      employerContact.appendChild(employerPhone);
+
       employerLocation.appendChild(employerAddress);
       employerLocation.appendChild(employerAddress2);
       employerLocation.appendChild(employerCity);
@@ -428,6 +430,7 @@ export default {
       employee.appendChild(complement);
       employeeGroup.appendChild(employee);
       employeeGroup.appendChild(contract);
+      employeeGroup.appendChild(comment);
 
       groupDpae.appendChild(employerCategory);
       groupDpae.appendChild(employeeGroup);
