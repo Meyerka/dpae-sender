@@ -11,6 +11,7 @@
               <v-text-field v-model="siretNumber" label="SIRET Number"></v-text-field>
               <v-text-field v-model="urssafCode" label="URSSAF Code"></v-text-field>
               <v-text-field v-model="nafCode" label="NAF Code"></v-text-field>
+              <v-text-field v-model="contract.healthService" label="Health service number"></v-text-field>
               <v-text-field v-model="employer.name" label="Employer name"></v-text-field>
               <v-text-field v-model="employer.altName" label="Alternative name"></v-text-field>
               <v-text-field v-model="employer.address" label="Address"></v-text-field>
@@ -47,7 +48,6 @@
                 <v-date-picker v-model="contract.hiringDate" @input="menu2 = false"></v-date-picker>
               </v-menu>
 
-              <v-text-field v-model="contract.healthService" label="Health service number"></v-text-field>
               <v-text-field
                 v-model="contract.trialPeriod"
                 label="Trial period (in days)"
