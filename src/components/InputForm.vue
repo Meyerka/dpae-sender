@@ -5,13 +5,28 @@
         <v-col cols="6">
           <v-card>
             <v-card-title class="success dark">
-              <span class="headline white--text">Contract</span>
+              <span class="headline white--text">Employer</span>
             </v-card-title>
             <v-card-text>
               <v-text-field v-model="siretNumber" label="SIRET Number"></v-text-field>
               <v-text-field v-model="urssafCode" label="URSSAF Code"></v-text-field>
               <v-text-field v-model="nafCode" label="NAF Code"></v-text-field>
-
+              <v-text-field v-model="employer.name" label="Employer name"></v-text-field>
+              <v-text-field v-model="employer.altName" label="Alternative name"></v-text-field>
+              <v-text-field v-model="employer.address" label="Address"></v-text-field>
+              <v-text-field v-model="employer.address2" label="Address 2"></v-text-field>
+              <v-text-field v-model="employer.postCode" label="Employer postcode"></v-text-field>
+              <v-text-field v-model="employer.city" label="Employer city"></v-text-field>
+              <v-text-field v-model="employer.phone" label="Employer phone"></v-text-field>
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="6">
+          <v-card>
+            <v-card-title class="success dark">
+              <span class="headline white--text">Contract</span>
+            </v-card-title>
+            <v-card-text>
               <v-menu
                 v-model="menu2"
                 :close-on-content-click="false"
@@ -60,22 +75,6 @@
                 </template>
                 <v-date-picker v-model="contract.endOfCdd" @input="menu3 = false"></v-date-picker>
               </v-menu>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="6">
-          <v-card>
-            <v-card-title class="success dark">
-              <span class="headline white--text">Employer</span>
-            </v-card-title>
-            <v-card-text>
-              <v-text-field v-model="employer.name" label="Employer name"></v-text-field>
-              <v-text-field v-model="employer.altName" label="Alternative name"></v-text-field>
-              <v-text-field v-model="employer.address" label="Address"></v-text-field>
-              <v-text-field v-model="employer.address2" label="Address 2"></v-text-field>
-              <v-text-field v-model="employer.postCode" label="Employer postcode"></v-text-field>
-              <v-text-field v-model="employer.city" label="Employer city"></v-text-field>
-              <v-text-field v-model="employer.phone" label="Employer phone"></v-text-field>
             </v-card-text>
           </v-card>
         </v-col>
