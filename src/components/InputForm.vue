@@ -92,6 +92,7 @@
           <v-text-field v-model="employee.birthPlace" label="Birth place"></v-text-field>
           <v-text-field v-model="employee.birthDepartment" label="Birth department"></v-text-field>
           <v-text-field v-model="employee.socialSecurityNumber" label="Social security number"></v-text-field>
+          <v-text-field v-model="nirKey" label="Social security key" disabled></v-text-field>
           <v-checkbox
             v-model="isTest"
             persistent-hint
@@ -110,11 +111,10 @@
         </v-col>
 
         <v-col>
-          <v-btn @click="authDpae()" color="success" class="my-6">Test api</v-btn>
+          <v-btn @click="postDpae()" color="success" class="my-6">Test api</v-btn>
         </v-col>
       </v-row>
     </v-container>
-    {{authstring}}
   </div>
 </template>
 
@@ -127,6 +127,7 @@ export default {
     menu2: "",
     menu3: "",
     authstring: "",
+    xmlResult: "",
     isTest: "1",
     siretNumber: "",
     urssafCode: "",
@@ -148,6 +149,7 @@ export default {
       birthPlace: "",
       birthDepartment: "",
       socialSecurityNumber: "",
+      socialSecurityKey: "",
     },
 
     contract: {
@@ -167,6 +169,11 @@ export default {
       { text: "CDI", value: "CDI" },
     ],
   }),
+  computed: {
+    nirKey: function () {
+      return 97 - (this.employee.socialSecurityNumber % 97);
+    },
+  },
   mounted() {
     const body = process.env.VUE_APP_ENV_BODY;
     const config = {
@@ -181,20 +188,22 @@ export default {
       )
       .then((response) => {
         console.log(response);
-        this.authstring = response;
+        this.authstring = response.data;
       });
   },
   props: {},
   methods: {
     postDpae() {
-      const body = "";
+      const body = this.xmlResult;
       const config = {
         headers: {
-          "Content-Type": "text/xml",
-          Authorization: "DSNLogin jeton= " + this.info,
+          "Content-Type": "application/xml",
+          Accept: "application/xml",
+          Authorization: this.authstring,
         },
       };
-
+      console.log(body);
+      console.log(config);
       axios
         .post(
           "https://depot.dpae-edi.urssaf.fr:8443/deposer-dsn/1.0/",
@@ -203,7 +212,6 @@ export default {
         )
         .then((response) => {
           console.log(response);
-          this.authstring = response;
         });
     },
     seedData() {
@@ -222,7 +230,7 @@ export default {
       const serializer = new XMLSerializer();
       let xmlStr = serializer.serializeToString(this.createXML());
       xmlStr = '<?xml version="1.0" encoding="ISO-8859-1" ?>' + xmlStr;
-      console.log(xmlStr);
+      this.xmlResult = xmlStr;
       let encodedXml =
         "data:text/xml;charset=utf-8," + encodeURIComponent(xmlStr);
       let link = document.createElement("a");
@@ -339,7 +347,7 @@ export default {
       let nniNumber = xmlDoc.createElement("rxpers:FR_NNI.NIR.Identifier");
       nniNumber.innerHTML = this.employee.socialSecurityNumber;
       let nniKey = xmlDoc.createElement("rxpers:FR_NNI.NIRKey.Text");
-      nniKey.innerHTML = "TO BE CALCULATED";
+      nniKey.innerHTML = this.nirKey;
 
       let birth = xmlDoc.createElement("rxpers:FR_Birth");
 
@@ -439,7 +447,6 @@ export default {
       upload.appendChild(groupDpae);
 
       xmlDoc.appendChild(upload);
-      console.log(xmlDoc);
 
       return xmlDoc;
     },
