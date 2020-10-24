@@ -5,26 +5,6 @@
         <v-col cols="6">
           <v-card>
             <v-card-title class="success dark">
-              <span class="headline white--text">Employer</span>
-            </v-card-title>
-            <v-card-text>
-              <v-text-field v-model="siretNumber" label="SIRET Number"></v-text-field>
-              <v-text-field v-model="urssafCode" label="URSSAF Code"></v-text-field>
-              <v-text-field v-model="nafCode" label="NAF Code"></v-text-field>
-              <v-text-field v-model="contract.healthService" label="Health service number"></v-text-field>
-              <v-text-field v-model="employer.name" label="Employer name"></v-text-field>
-              <v-text-field v-model="employer.altName" label="Alternative name"></v-text-field>
-              <v-text-field v-model="employer.address" label="Address"></v-text-field>
-              <v-text-field v-model="employer.address2" label="Address 2"></v-text-field>
-              <v-text-field v-model="employer.postCode" label="Employer postcode"></v-text-field>
-              <v-text-field v-model="employer.city" label="Employer city"></v-text-field>
-              <v-text-field v-model="employer.phone" label="Employer phone"></v-text-field>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="6">
-          <v-card>
-            <v-card-title class="success dark">
               <span class="headline white--text">Contract</span>
             </v-card-title>
             <v-card-text>
@@ -131,18 +111,7 @@ export default {
     authstring: "",
     xmlResult: "",
     isTest: "1",
-    siretNumber: "",
-    urssafCode: "",
-    nafCode: "",
-    employer: {
-      name: "",
-      altName: "",
-      address: "",
-      address2: "",
-      postCode: "",
-      city: "",
-      phone: "",
-    },
+
     employee: {
       lastName: "",
       firstName: "",
@@ -156,7 +125,6 @@ export default {
 
     contract: {
       hiringDate: "",
-      healthService: "",
       trialPeriod: "",
       type: "",
       endOfCdd: "",
