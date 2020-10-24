@@ -1,32 +1,22 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar app color="success" dark>
+      <v-toolbar-title>DPAE Sender</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <router-link to="/">
+        <v-btn color="grey darken-3" class="my-6">Home</v-btn>
+      </router-link>
+
+      <router-link to="/preview">
+        <v-btn color="grey darken-3" class="my-6">Preview</v-btn>
+      </router-link>
+      <router-link to="/about">
+        <v-btn color="grey darken-3" class="my-6">About</v-btn>
+      </router-link>
+    </v-app-bar>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
