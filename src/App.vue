@@ -6,7 +6,6 @@
       <router-link to="/">
         <v-btn color="grey darken-3" class="my-6">Home</v-btn>
       </router-link>
-
       <router-link to="/preview">
         <v-btn color="grey darken-3" class="my-6">Preview</v-btn>
       </router-link>

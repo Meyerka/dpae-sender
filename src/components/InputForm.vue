@@ -106,7 +106,10 @@
           <v-btn @click="seedData()" color="primary" class="my-6">Seed data for tests</v-btn>
         </v-col>
         <v-col>
-          <v-btn @click="downloadXML()" color="success" class="my-6">Generate file</v-btn>
+          <v-btn @click="downloadXML()" color="success" class="my-6">download file</v-btn>
+        </v-col>
+        <v-col>
+          <v-btn @click="commitEmployer()" color="success" class="my-6">OK store</v-btn>
         </v-col>
 
         <v-col>
@@ -192,6 +195,9 @@ export default {
   },
   props: {},
   methods: {
+    commitEmployer() {
+      this.$store.commit("setEmployer", this.employer);
+    },
     postDpae() {
       const body = this.xmlResult;
       const config = {
