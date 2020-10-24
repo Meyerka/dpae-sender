@@ -83,13 +83,7 @@
       </v-card>
       <v-row>
         <v-col>
-          <v-btn @click="seedData()" color="primary" class="my-6">Seed data for tests</v-btn>
-        </v-col>
-        <v-col>
           <v-btn @click="downloadXML()" color="success" class="my-6">download file</v-btn>
-        </v-col>
-        <v-col>
-          <v-btn @click="commitEmployer()" color="success" class="my-6">OK store</v-btn>
         </v-col>
 
         <v-col>
@@ -163,9 +157,6 @@ export default {
   },
   props: {},
   methods: {
-    commitEmployer() {
-      this.$store.commit("setEmployer", this.employer);
-    },
     postDpae() {
       const body = this.xmlResult;
       const config = {
@@ -187,18 +178,7 @@ export default {
           console.log(response);
         });
     },
-    seedData() {
-      this.siretNumber = process.env.VUE_APP_ENV_SIRET;
-      this.urssafCode = process.env.VUE_APP_ENV_URSSAFCODE;
-      this.nafCode = process.env.VUE_APP_ENV_NAFCODE;
-      this.employer.name = process.env.VUE_APP_ENV_ORGNAME;
-      this.employer.altName = process.env.VUE_APP_ENV_ORGNAMEBIS;
-      this.employer.address = process.env.VUE_APP_ENV_ORGADDRESS;
-      this.employer.address2 = process.env.VUE_APP_ENV_ORGADDRESS2;
-      this.employer.postCode = process.env.VUE_APP_ENV_ORGPOSTCODE;
-      this.employer.city = process.env.VUE_APP_ENV_ORGCITY;
-      this.employer.phone = process.env.VUE_APP_ENV_ORGPHONE;
-    },
+
     downloadXML() {
       const serializer = new XMLSerializer();
       let xmlStr = serializer.serializeToString(this.createXML());
