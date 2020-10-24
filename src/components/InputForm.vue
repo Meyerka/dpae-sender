@@ -1,97 +1,95 @@
 <template>
-  <div>
-    <v-container>
-      <v-row>
-        <v-col cols="6">
-          <v-card>
-            <v-card-title class="success dark">
-              <span class="headline white--text">Contract</span>
-            </v-card-title>
-            <v-card-text>
-              <v-menu
-                v-model="menu2"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="contract.hiringDate"
-                    label="Hiring date"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="contract.hiringDate" @input="menu2 = false"></v-date-picker>
-              </v-menu>
+  <v-container>
+    <v-row>
+      <v-col cols="6">
+        <v-card>
+          <v-card-title class="success dark">
+            <span class="headline white--text">Contract</span>
+          </v-card-title>
+          <v-card-text>
+            <v-menu
+              v-model="menu2"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="contract.hiringDate"
+                  label="Hiring date"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="contract.hiringDate" @input="menu2 = false"></v-date-picker>
+            </v-menu>
 
-              <v-text-field
-                v-model="contract.trialPeriod"
-                label="Trial period (in days)"
-                type="number"
-              ></v-text-field>
-              <v-select :items="contractSelect" v-model="contract.type" label="Type"></v-select>
+            <v-text-field
+              v-model="contract.trialPeriod"
+              label="Trial period (in days)"
+              type="number"
+            ></v-text-field>
+            <v-select :items="contractSelect" v-model="contract.type" label="Type"></v-select>
 
-              <v-menu
-                v-if="contract.type==='CDD'"
-                v-model="menu3"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="contract.endOfCdd"
-                    label="End of CDD"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="contract.endOfCdd" @input="menu3 = false"></v-date-picker>
-              </v-menu>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-card>
-        <v-card-title class="success dark">
-          <span class="headline white--text">Employee</span>
-        </v-card-title>
-        <v-card-text>
-          <v-text-field v-model="employee.lastName" label="Last name"></v-text-field>
-          <v-text-field v-model="employee.firstName" label="First name"></v-text-field>
-          <v-select :items="genderSelect" v-model="employee.gender" label="Gender"></v-select>
-          <v-text-field v-model="employee.birthDate" label="Birth date"></v-text-field>
-          <v-text-field v-model="employee.birthPlace" label="Birth place"></v-text-field>
-          <v-text-field v-model="employee.birthDepartment" label="Birth department"></v-text-field>
-          <v-text-field v-model="employee.socialSecurityNumber" label="Social security number"></v-text-field>
-          <v-text-field v-model="nirKey" label="Social security key" disabled></v-text-field>
-          <v-checkbox
-            v-model="isTest"
-            persistent-hint
-            hint="TestFile ?"
-            true-value="1"
-            false-value="0"
-          />
-        </v-card-text>
-      </v-card>
-      <v-row>
-        <v-col>
-          <v-btn @click="downloadXML()" color="success" class="my-6">download file</v-btn>
-        </v-col>
+            <v-menu
+              v-if="contract.type==='CDD'"
+              v-model="menu3"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="contract.endOfCdd"
+                  label="End of CDD"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="contract.endOfCdd" @input="menu3 = false"></v-date-picker>
+            </v-menu>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-card>
+      <v-card-title class="success dark">
+        <span class="headline white--text">Employee</span>
+      </v-card-title>
+      <v-card-text>
+        <v-text-field v-model="employee.lastName" label="Last name"></v-text-field>
+        <v-text-field v-model="employee.firstName" label="First name"></v-text-field>
+        <v-select :items="genderSelect" v-model="employee.gender" label="Gender"></v-select>
+        <v-text-field v-model="employee.birthDate" label="Birth date"></v-text-field>
+        <v-text-field v-model="employee.birthPlace" label="Birth place"></v-text-field>
+        <v-text-field v-model="employee.birthDepartment" label="Birth department"></v-text-field>
+        <v-text-field v-model="employee.socialSecurityNumber" label="Social security number"></v-text-field>
+        <v-text-field v-model="nirKey" label="Social security key" disabled></v-text-field>
+        <v-checkbox
+          v-model="isTest"
+          persistent-hint
+          hint="TestFile ?"
+          true-value="1"
+          false-value="0"
+        />
+      </v-card-text>
+    </v-card>
+    <v-row>
+      <v-col>
+        <v-btn @click="downloadXML()" color="success" class="my-6">download file</v-btn>
+      </v-col>
 
-        <v-col>
-          <v-btn @click="postDpae()" color="success" class="my-6">Test api</v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+      <v-col>
+        <v-btn @click="postDpae()" color="success" class="my-6">Test api</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
