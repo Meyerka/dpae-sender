@@ -1,22 +1,5 @@
 <template>
   <v-app>
-    <!-- <v-app-bar app color="success" dark>
-      <v-toolbar-title>DPAE Sender</v-toolbar-title>
-      <v-spacer></v-spacer>
-      
-        <v-btn color="grey darken-3" class="my-6">Add employee</v-btn>
-      </router-link>
-      <router-link to="/employer">
-        <v-btn color="grey darken-3" class="my-6">Employer</v-btn>
-      </router-link>
-      <router-link to="/preview">
-        <v-btn color="grey darken-3" class="my-6">Preview</v-btn>
-      </router-link>
-      <router-link to="/about">
-        <v-btn color="grey darken-3" class="my-6">About</v-btn>
-      </router-link>
-    </v-app-bar>-->
-
     <v-navigation-drawer app>
       <v-list-item>
         <v-list-item-content>
@@ -52,6 +35,15 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Configure employer</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon>mdi-cloud-upload</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Download XML</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

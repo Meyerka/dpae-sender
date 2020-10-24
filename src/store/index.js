@@ -5,9 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    employer: {}
+    employer: {},
+    employees: [],
+
   },
   mutations: {
+
     setSiretNumber: (state, siret) => (state.employer.siretNumber = siret),
     setHealthService: (state, healthService) => (state.employer.healthService = healthService),
     setUrssafCode: (state, urssafCode) => (state.employer.urssafCode = urssafCode),
@@ -19,6 +22,9 @@ export default new Vuex.Store({
     setPostCode: (state, postCode) => (state.employer.postCode = postCode),
     setCity: (state, city) => (state.employer.city = city),
     setPhone: (state, phone) => (state.employer.phone = phone),
+
+    addEmployee: (state, emp) => (state.employees.push(emp)),
+
 
   },
   actions: {

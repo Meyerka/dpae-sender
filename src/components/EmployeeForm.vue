@@ -17,25 +17,25 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="contract.hiringDate"
+                  v-model="employee.contract.hiringDate"
                   label="Hiring date"
                   readonly
                   v-bind="attrs"
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="contract.hiringDate" @input="menu2 = false"></v-date-picker>
+              <v-date-picker v-model="employee.contract.hiringDate" @input="menu2 = false"></v-date-picker>
             </v-menu>
 
             <v-text-field
-              v-model="contract.trialPeriod"
+              v-model="employee.contract.trialPeriod"
               label="Trial period (in days)"
               type="number"
             ></v-text-field>
-            <v-select :items="contractSelect" v-model="contract.type" label="Type"></v-select>
+            <v-select :items="contractSelect" v-model="employee.contract.type" label="Type"></v-select>
 
             <v-menu
-              v-if="contract.type==='CDD'"
+              v-if="employee.contract.type==='CDD'"
               v-model="menu3"
               :close-on-content-click="false"
               :nudge-right="40"
@@ -45,14 +45,14 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="contract.endOfCdd"
+                  v-model="employee.contract.endOfCdd"
                   label="End of CDD"
                   readonly
                   v-bind="attrs"
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="contract.endOfCdd" @input="menu3 = false"></v-date-picker>
+              <v-date-picker v-model="employee.contract.endOfCdd" @input="menu3 = false"></v-date-picker>
             </v-menu>
           </v-card-text>
         </v-card>
@@ -82,11 +82,11 @@
     </v-card>
     <v-row>
       <v-col>
-        <v-btn @click="downloadXML()" color="success" class="my-6">download file</v-btn>
+        <v-btn @click="postDpae()" color="success" class="my-6">Test api</v-btn>
       </v-col>
 
       <v-col>
-        <v-btn @click="postDpae()" color="success" class="my-6">Test api</v-btn>
+        <v-btn @click="commitEmployee()" color="success" class="my-6">Add employee</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -113,15 +113,15 @@ export default {
       birthDepartment: "",
       socialSecurityNumber: "",
       socialSecurityKey: "",
+      contract: {
+        hiringDate: "",
+        trialPeriod: "",
+        type: "",
+        endOfCdd: "",
+      },
+      comment: "",
     },
 
-    contract: {
-      hiringDate: "",
-      trialPeriod: "",
-      type: "",
-      endOfCdd: "",
-    },
-    comment: "",
     genderSelect: [
       { text: "Female", value: "2" },
       { text: "Male", value: "1" },
@@ -155,6 +155,10 @@ export default {
   },
   props: {},
   methods: {
+    commitEmployee() {
+      console.log(this.employee);
+      this.$store.commit("addEmployee", this.employee);
+    },
     postDpae() {
       const body = this.xmlResult;
       const config = {
