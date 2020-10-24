@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="6">
+      <v-col>
         <v-card>
           <v-card-title class="success dark">
             <span class="headline white--text">Contract</span>
