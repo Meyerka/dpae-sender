@@ -1,9 +1,16 @@
 <template>
   <v-container>
-    <h2>Created with Vue</h2>
-    <h2>Designed wiith Vuetify</h2>
-    <h2>Source code:</h2>
-    {{this.$store.state.employer}}
-    {{this.$store.state.employees}}
+    <ul>
+      <li>Created with Vue</li>
+      <li>
+        Styled with
+        <a href="https://vuetifyjs.com/en/">Vuetify</a>
+      </li>
+
+      <li>
+        <a href="https://github.com/Meyerka/dpae-sender">Source code</a>
+      </li>
+      <li>© Under MIT Licensing - 2020 - Karl-Erik Meyer</li>
+    </ul>
   </v-container>
 </template>
