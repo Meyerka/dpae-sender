@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../components/EmployeeList.vue'
 import Employee from '../components/EmployeeForm.vue'
 import Employer from '../components/EmployerForm.vue'
+import Preview from '../components/FilePreview.vue'
 import About from '../components/About.vue'
 
 Vue.use(VueRouter)
@@ -23,6 +24,12 @@ const routes = [
     name: 'Employer',
     component: Employer
   },
+  {
+    path: '/preview',
+    name: 'Preview',
+    component: Preview
+  },
+
   {
     path: '/about',
     name: 'About',

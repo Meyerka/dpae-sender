@@ -38,12 +38,12 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item>
+        <v-list-item to="/preview">
           <v-list-item-icon>
             <v-icon>mdi-cloud-upload</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Download XML</v-list-item-title>
+            <v-list-item-title>Preview XML</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
