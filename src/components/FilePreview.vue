@@ -1,9 +1,6 @@
 <template>
   <v-container>
-    <h1>File preview</h1>
-    <highlightjs autodetect :code="xmlDoc" />
-
-    {{xmlDoc}}
+    <code>{{xmlDoc}}</code>
   </v-container>
 </template>
 
@@ -86,74 +83,6 @@ export default {
     );
     employerPhoneNumber.innerHTML = this.$store.state.employer.phone;
 
-    let employeeGroup = xmlDoc.createElement("FR_EmployeeGroup");
-    let employee = xmlDoc.createElement("FR_Employee");
-    let employeeIdentity = xmlDoc.createElement("FR_EmployeeIdentity");
-
-    let surname = xmlDoc.createElement("rxpers:FR_PersonIdentity.Surname.Text");
-    surname.innerHTML = this.$store.state.employees[0].lastName;
-
-    let usualName = xmlDoc.createElement(
-      "rxpers:FR_PersonIdentity.UsualName.Text"
-    );
-    usualName.innerHTML = this.$store.state.employees[0].lastName;
-
-    let firstName = xmlDoc.createElement(
-      "rxpers:FR_PersonIdentity.ChristianName.Text"
-    );
-    firstName.innerHTML = this.$store.state.employees[0].firstName;
-
-    let gender = xmlDoc.createElement("rxpers:FR_PersonIdentity.Sex.Code");
-    gender.innerHTML = this.$store.state.employees[0].gender;
-
-    let nni = xmlDoc.createElement("rxpers:FR_NNI");
-    let nniNumber = xmlDoc.createElement("rxpers:FR_NNI.NIR.Identifier");
-    nniNumber.innerHTML = this.$store.state.employees[0].socialSecurityNumber;
-    let nniKey = xmlDoc.createElement("rxpers:FR_NNI.NIRKey.Text");
-    nniKey.innerHTML = this.nirKey;
-
-    let birth = xmlDoc.createElement("rxpers:FR_Birth");
-
-    let birthDate = xmlDoc.createElement("rxpers:FR_Birth.Date");
-    birthDate.innerHTML = this.$store.state.employees[0].birthDate;
-
-    let birthTown = xmlDoc.createElement("rxpers:FR_Birth.Town.Text");
-    birthTown.innerHTML = this.$store.state.employees[0].birthPlace;
-
-    let complement = xmlDoc.createElement("FR_EmployeeComplement");
-
-    let birthDepartment = xmlDoc.createElement(
-      "FR_EmployeeComplement.Birth_Department.Code"
-    );
-    birthDepartment.innerHTML = this.$store.state.employees[0].birthDepartment;
-
-    let contract = xmlDoc.createElement("FR_Contract");
-    let contractStartDate = xmlDoc.createElement(
-      "FR_Contract.StartContract.Date"
-    );
-    contractStartDate.innerHTML = this.$store.state.employees[0].contract.hiringDate;
-
-    let contractStartTime = xmlDoc.createElement(
-      "FR_Contract.StartContract.Time"
-    );
-    contractStartTime.innerHTML = "00:00:00";
-
-    let contractEndDate = xmlDoc.createElement("FR_Contract.EndContract.Date");
-    contractEndDate.innerHTML = this.$store.state.employees[0].contract.endOfCdd;
-
-    let contractCode = xmlDoc.createElement("FR_Contract.Nature.Code");
-    contractCode.innerHTML = this.$store.state.employees[0].contract.type;
-
-    let contractHealthService = xmlDoc.createElement(
-      "FR_Contract.HealthService.Text"
-    );
-    contractHealthService.innerHTML = this.$store.state.employees[0].contract.healthService;
-
-    let trialTime = xmlDoc.createElement("FR_Contract.TrialTime.Text");
-    trialTime.innerHTML = this.$store.state.employees[0].contract.trialPeriod;
-
-    let comment = xmlDoc.createElement("FR_EmployeeGroup.Comment.Text");
-    comment.innerHTML = this.$store.state.employees[0].comment;
     employerPhone.appendChild(employerPhoneNumber);
 
     employerContact.appendChild(employerPhone);
@@ -173,36 +102,121 @@ export default {
     employerCategory.appendChild(employerLocation);
     employerCategory.appendChild(employerContact);
 
-    employeeIdentity.appendChild(surname);
-    employeeIdentity.appendChild(usualName);
-    employeeIdentity.appendChild(firstName);
-    employeeIdentity.appendChild(gender);
-
-    nni.appendChild(nniNumber);
-    nni.appendChild(nniKey);
-
-    birth.appendChild(birthDate);
-    birth.appendChild(birthTown);
-
-    complement.appendChild(birthDepartment);
-
-    contract.appendChild(contractStartDate);
-    contract.appendChild(contractStartTime);
-    contract.appendChild(contractEndDate);
-    contract.appendChild(contractCode);
-    contract.appendChild(contractHealthService);
-    contract.appendChild(trialTime);
-
-    employee.appendChild(employeeIdentity);
-    employee.appendChild(nni);
-    employee.appendChild(birth);
-    employee.appendChild(complement);
-    employeeGroup.appendChild(employee);
-    employeeGroup.appendChild(contract);
-    employeeGroup.appendChild(comment);
-
     groupDpae.appendChild(employerCategory);
-    groupDpae.appendChild(employeeGroup);
+
+    for (let i = 0; i < this.$store.state.employees.length; i++) {
+      let employeeGroup = xmlDoc.createElement("FR_EmployeeGroup");
+
+      let employee = xmlDoc.createElement("FR_Employee");
+      let employeeIdentity = xmlDoc.createElement("FR_EmployeeIdentity");
+
+      let surname = xmlDoc.createElement(
+        "rxpers:FR_PersonIdentity.Surname.Text"
+      );
+      surname.innerHTML = this.$store.state.employees[i].lastName;
+
+      let usualName = xmlDoc.createElement(
+        "rxpers:FR_PersonIdentity.UsualName.Text"
+      );
+      usualName.innerHTML = this.$store.state.employees[i].lastName;
+
+      let firstName = xmlDoc.createElement(
+        "rxpers:FR_PersonIdentity.ChristianName.Text"
+      );
+      firstName.innerHTML = this.$store.state.employees[i].firstName;
+
+      let gender = xmlDoc.createElement("rxpers:FR_PersonIdentity.Sex.Code");
+      gender.innerHTML = this.$store.state.employees[i].gender;
+
+      let nni = xmlDoc.createElement("rxpers:FR_NNI");
+      let nniNumber = xmlDoc.createElement("rxpers:FR_NNI.NIR.Identifier");
+      nniNumber.innerHTML = this.$store.state.employees[i].socialSecurityNumber;
+      let nniKey = xmlDoc.createElement("rxpers:FR_NNI.NIRKey.Text");
+      nniKey.innerHTML = this.nirKey;
+
+      let birth = xmlDoc.createElement("rxpers:FR_Birth");
+
+      let birthDate = xmlDoc.createElement("rxpers:FR_Birth.Date");
+      birthDate.innerHTML = this.$store.state.employees[i].birthDate;
+
+      let birthTown = xmlDoc.createElement("rxpers:FR_Birth.Town.Text");
+      birthTown.innerHTML = this.$store.state.employees[i].birthPlace;
+
+      let complement = xmlDoc.createElement("FR_EmployeeComplement");
+
+      let birthDepartment = xmlDoc.createElement(
+        "FR_EmployeeComplement.Birth_Department.Code"
+      );
+      birthDepartment.innerHTML = this.$store.state.employees[
+        i
+      ].birthDepartment;
+
+      let contract = xmlDoc.createElement("FR_Contract");
+      let contractStartDate = xmlDoc.createElement(
+        "FR_Contract.StartContract.Date"
+      );
+      contractStartDate.innerHTML = this.$store.state.employees[
+        i
+      ].contract.hiringDate;
+
+      let contractStartTime = xmlDoc.createElement(
+        "FR_Contract.StartContract.Time"
+      );
+      contractStartTime.innerHTML = "00:00:00";
+
+      let contractEndDate = xmlDoc.createElement(
+        "FR_Contract.EndContract.Date"
+      );
+      contractEndDate.innerHTML = this.$store.state.employees[
+        i
+      ].contract.endOfCdd;
+
+      let contractCode = xmlDoc.createElement("FR_Contract.Nature.Code");
+      contractCode.innerHTML = this.$store.state.employees[i].contract.type;
+
+      let contractHealthService = xmlDoc.createElement(
+        "FR_Contract.HealthService.Text"
+      );
+      contractHealthService.innerHTML = this.$store.state.employees[
+        i
+      ].contract.healthService;
+
+      let trialTime = xmlDoc.createElement("FR_Contract.TrialTime.Text");
+      trialTime.innerHTML = this.$store.state.employees[i].contract.trialPeriod;
+
+      let comment = xmlDoc.createElement("FR_EmployeeGroup.Comment.Text");
+      comment.innerHTML = this.$store.state.employees[i].comment;
+
+      employeeIdentity.appendChild(surname);
+      employeeIdentity.appendChild(usualName);
+      employeeIdentity.appendChild(firstName);
+      employeeIdentity.appendChild(gender);
+
+      nni.appendChild(nniNumber);
+      nni.appendChild(nniKey);
+
+      birth.appendChild(birthDate);
+      birth.appendChild(birthTown);
+
+      complement.appendChild(birthDepartment);
+
+      contract.appendChild(contractStartDate);
+      contract.appendChild(contractStartTime);
+      contract.appendChild(contractEndDate);
+      contract.appendChild(contractCode);
+      contract.appendChild(contractHealthService);
+      contract.appendChild(trialTime);
+
+      employee.appendChild(employeeIdentity);
+      employee.appendChild(nni);
+      employee.appendChild(birth);
+      employee.appendChild(complement);
+      employeeGroup.appendChild(employee);
+      employeeGroup.appendChild(contract);
+      employeeGroup.appendChild(comment);
+
+      groupDpae.appendChild(employeeGroup);
+    }
 
     upload.appendChild(testIndicator);
     upload.appendChild(groupDpae);
