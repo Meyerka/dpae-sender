@@ -158,6 +158,7 @@ export default {
     commitEmployee() {
       console.log(this.employee);
       this.$store.commit("addEmployee", this.employee);
+      this.$router.push("/");
     },
     postDpae() {
       const body = this.xmlResult;
