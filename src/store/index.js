@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     employer: {},
     employees: [],
-
+    XMLFile: "",
   },
   mutations: {
 
@@ -24,7 +24,7 @@ export default new Vuex.Store({
     setPhone: (state, phone) => (state.employer.phone = phone),
 
     addEmployee: (state, emp) => (state.employees.push(emp)),
-
+    setXMLFile: (state, file) => (state.XMLFile = file),
 
   },
   actions: {

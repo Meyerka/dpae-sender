@@ -161,12 +161,12 @@ export default {
       this.$router.push("/");
     },
     postDpae() {
-      const body = this.xmlResult;
+      const body = this.$store.state.XMLFile;
       const config = {
         headers: {
-          "Content-Type": "application/xml",
-          Accept: "application/xml",
-          Authorization: this.authstring,
+          "Authorization": "DSNLogin jeton=" + this.authstring,
+          "content-type": "text/plain",
+          "Content-Encoding": "gzip",
         },
       };
       console.log(body);

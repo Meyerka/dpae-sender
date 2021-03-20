@@ -31,7 +31,7 @@ export default {
     );
 
     let testIndicator = xmlDoc.createElement("FR_DUE_Upload.Test.Indicator");
-    testIndicator.innerHTML = "1";
+    testIndicator.innerHTML = "120";
     let groupDpae = xmlDoc.createElement("FR_DuesGroup");
     let employerCategory = xmlDoc.createElement("FR_Employer");
     let employerIdentity = xmlDoc.createElement("FR_EmployerIdentity");
@@ -225,6 +225,7 @@ export default {
     const serializer = new XMLSerializer();
     let xmlStr = serializer.serializeToString(xmlDoc);
     this.xmlDoc = xmlStr;
+    this.$store.commit("setXMLFile", xmlStr);
   },
 };
 </script>
